@@ -28,7 +28,7 @@
 1424192500 c:\users\hjalt_000\documents\github\compiler_fmal\parser.h
 	"Lexer.h"
 
-1424204959 c:\users\hjalt_000\documents\github\compiler_fmal\lexer.h
+1424208112 c:\users\hjalt_000\documents\github\compiler_fmal\lexer.h
 	<string>
 	<sstream>
 	<iostream>
@@ -39,10 +39,10 @@
 1424203456 c:\users\hjalt_000\documents\github\compiler_fmal\token.h
 	<string>
 
-1424192250 source:c:\users\hjalt_000\documents\github\compiler_fmal\parser.cpp
+1424207634 source:c:\users\hjalt_000\documents\github\compiler_fmal\parser.cpp
 	"Parser.h"
 
-1424205226 source:c:\users\hjalt_000\documents\github\compiler_fmal\lexer.cpp
+1424208097 source:c:\users\hjalt_000\documents\github\compiler_fmal\lexer.cpp
 	<iostream>
 	"Lexer.h"
 

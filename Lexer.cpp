@@ -7,18 +7,93 @@ Lexer::Lexer()
     while(getline(cin, input) && input != "end")
     {
         stringstream ss(input);
+
         istream_iterator<string> begin(ss);
         istream_iterator<string> end;
         vector<string> temparr(begin, end);
-        lexArr = temparr;
+
+        for(unsigned int i = 0; i < temparr.size(); i++)
+        {
+            lexArr.push_back(temparr[i]);
+        }
     }
+    counter = 0;
 }
 
 Token Lexer::nextToken()
 {
     // Implement
-    Token *myToken = new Token();
+    Token *nextToken = new Token();
 
+    if(counter < lexArr.size())
+    {
+        // Get the string at index counter
+        string word = lexArr[counter];
+        // Check if first digit of word is a letter
+        if(isalpha(word[0]))
+        {
+            if(word == "print")
+            {
+                nextToken->lexeme = word;
+                nextToken->tCode = Token::PRINT;
+            }
+            else
+            {
+                nextToken->lexeme = word;
+                nextToken->tCode = Token::ID;
+            }
+        }
+        // Else check if first digit of word is a number
+        else if(isdigit(word[0]))
+        {
+            nextToken->lexeme = word;
+            nextToken->tCode = Token::INT;
+        }
+        else if(word == "+")
+        {
+            nextToken->lexeme = "+";
+            nextToken->tCode = Token::PLUS;
+        }
+        else if (word == "-")
+        {
+            nextToken->lexeme = "-";
+            nextToken->tCode = Token::MINUS;
+        }
+        else if(word == "*")
+        {
+            nextToken->lexeme = "*";
+            nextToken->tCode = Token::MULT;
+        }
+        else if(word == "(")
+        {
+            nextToken->lexeme = "(";
+            nextToken->tCode = Token::LPAREN;
+        }
+        else if(word == ")")
+        {
+            nextToken->lexeme = ")";
+            nextToken->tCode = Token::RPAREN;
+        }
+        else if(word == "=")
+        {
+            nextToken->lexeme = "=";
+            nextToken->tCode = Token::ASSIGN;
+        }
+        else if(word == ";")
+        {
+            nextToken->lexeme = ";";
+            nextToken->tCode = Token::SEMICOL;
+        }
+        else
+        {
+            nextToken->tCode = Token::ERROR;
+        }
 
-    return *myToken;
+        counter++;
+
+        return *nextToken;
+
+    }
+    nextToken->tCode = Token::ERROR;
+    return *nextToken;
 }
