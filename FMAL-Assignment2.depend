@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1424188649 source:c:\users\hjalt_000\desktop\fmal-assignment2\compiler.cpp
+	<iostream>
+	"Token.h"
+	"Lexer.h"
+
+1424192079 source:c:\users\hjalt_000\desktop\fmal-assignment2\lexer.cpp
+	<iostream>
+	<sstream>
+	"Lexer.h"
+
+1424192250 source:c:\users\hjalt_000\desktop\fmal-assignment2\parser.cpp
+	"Parser.h"
+
+1424190866 c:\users\hjalt_000\desktop\fmal-assignment2\token.h
+	<string>
+
+1424187846 c:\users\hjalt_000\desktop\fmal-assignment2\lexer.h
+	"Token.h"
+
+1424192500 c:\users\hjalt_000\desktop\fmal-assignment2\parser.h
+	"Lexer.h"
+
