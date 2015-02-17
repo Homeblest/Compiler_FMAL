@@ -3,5 +3,5 @@
 
 void Parser::parse() {
 
-
+    myLexer->nextToken();
 }
