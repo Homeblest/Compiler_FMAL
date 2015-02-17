@@ -3,6 +3,8 @@
 
 #include <string>
 
+using namespace std;
+
 class Token {
 
 public:
@@ -16,12 +18,12 @@ public:
         tCode = ERROR;
     };
 
-    Token(std::string lex, TokenCode code){
+    Token(string lex, TokenCode code){
         lexeme = lex;
         tCode = code;
     };
 
-    std::string lexeme;
+    string lexeme;
     TokenCode tCode;
 };
 #endif // TOKEN_H

@@ -21,3 +21,25 @@
 1424192500 c:\users\hjalt_000\desktop\fmal-assignment2\parser.h
 	"Lexer.h"
 
+1424192334 source:c:\users\hjalt_000\documents\github\compiler_fmal\compiler.cpp
+	<iostream>
+	"Parser.h"
+
+1424192500 c:\users\hjalt_000\documents\github\compiler_fmal\parser.h
+	"Lexer.h"
+
+1424203385 c:\users\hjalt_000\documents\github\compiler_fmal\lexer.h
+	<string>
+	"Token.h"
+
+1424203456 c:\users\hjalt_000\documents\github\compiler_fmal\token.h
+	<string>
+
+1424192250 source:c:\users\hjalt_000\documents\github\compiler_fmal\parser.cpp
+	"Parser.h"
+
+1424203425 source:c:\users\hjalt_000\documents\github\compiler_fmal\lexer.cpp
+	<iostream>
+	<sstream>
+	"Lexer.h"
+

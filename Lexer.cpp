@@ -8,10 +8,10 @@ Token Lexer::nextToken()
     // Implement
     Token *myToken = new Token();
 
-    std::string input;
-    std::stringstream myStream;
+    string input;
+    stringstream myStream;
 
-    while(getline(std::cin, input) && input != "end;")
+    while(getline(cin, input) && input != "end")
     {
         // Read line and process
         for(unsigned int i = 0; i < input.length(); i++)
@@ -24,7 +24,7 @@ Token Lexer::nextToken()
                     myStream << input[i];
                     i++;
                 }
-                std::string word = myStream.str();
+                string word = myStream.str();
                 // One word is now in myStream
                 // Do stuff with that word.
                 if(word == "print")
@@ -36,7 +36,7 @@ Token Lexer::nextToken()
                     myToken->lexeme = word;
                     myToken->tCode = Token::ID;
                 }
-                myStream.str(std::string());
+                myStream.str(string());
             }
             else if(isdigit(input[i]))
             {
@@ -47,12 +47,12 @@ Token Lexer::nextToken()
                     i++;
                 }
 
-                std::string number = myStream.str();
+                string number = myStream.str();
 
                 myToken->lexeme = number;
                 myToken->tCode = Token::INT;
 
-                myStream.str(std::string());
+                myStream.str(string());
             }
             else if(input[i] == '+') {
                 myToken->lexeme = "+";
