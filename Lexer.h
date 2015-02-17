@@ -12,7 +12,7 @@
 class Lexer {
 
 private:
-    string input, final_string;
+    string input;
     vector<string> lexArr;
     unsigned int counter;
 
