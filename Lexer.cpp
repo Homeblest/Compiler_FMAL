@@ -90,6 +90,7 @@ Token Lexer::nextToken()
                         nextToken->lexeme = "end";
                         nextToken->tCode = Token::END;
                         finalString.erase(0,3);
+                        return *nextToken;
                     }
                 }
             }
@@ -107,30 +108,27 @@ Token Lexer::nextToken()
                             nextToken->lexeme = "print";
                             nextToken->tCode = Token::PRINT;
                             finalString.erase(0,5);
+                            return *nextToken;
                         }
                     }
                 }
             }
         }
-        else
+        int j = 0;
+        string id = "";
+        while(isalpha(finalString[j]))
         {
-            int j = 0;
-            string id = "";
-            while(isalpha(finalString[j]))
-            {
-                id += finalString[j];
-                j++;
-            }
-                nextToken->lexeme = id;
-                nextToken->tCode = Token::ID;
-                finalString.erase(0,id.length());
-            }
+            id += finalString[j];
+            j++;
+        }
+        nextToken->lexeme = id;
+        nextToken->tCode = Token::ID;
+        finalString.erase(0,id.length());
     }
     else
     {
         nextToken->lexeme = "wow";
         nextToken->tCode = Token::ERROR;
     }
-    //cout << nextToken->lexeme << " ";
     return *nextToken;
 }
