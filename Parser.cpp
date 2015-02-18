@@ -69,17 +69,60 @@ bool Parser::statement()
 }
 bool Parser::expr()
 {
+    if(!term()){
+        return false;
+    }
+    else if(curToken.tCode == Token::PLUS){
+        curToken = myLexer->nextToken();
+        if(!expr()){
+            return false;
+        }
+    }
+    else if(curToken.tCode == Token::MINUS){
+        curToken = myLexer->nextToken();
+        if(!expr()){
+            return false;
+        }
+    }
 
     return true;
 }
 
 bool Parser::term()
 {
+    if(!factor()){
+        return false;
+    }
+    else if(curToken.tCode == Token::MULT){
+        curToken = myLexer->nextToken();
+        if(!term()){
+            return false;
+        }
+    }
     return true;
 }
 
 bool Parser::factor()
 {
+    if(curToken.tCode == Token::INT){
+        return true;
+    }
+    else if(curToken.tCode == Token::ID){
+        return true;
+    }
+    else if(curToken.tCode == Token::LPAREN){
+        curToken = myLexer->nextToken();
+        if(!expr()){
+            return false;
+        }
+        if(curToken.tCode == Token::RPAREN){
+            return true;
+        }
+    }
+    else
+    {
+        return false;
+    }
     return true;
 }
 
