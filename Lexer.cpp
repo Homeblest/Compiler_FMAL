@@ -12,12 +12,40 @@ Lexer::Lexer()
         istream_iterator<string> end;
         vector<string> temparr(begin, end);
 
+        string word;
         for(unsigned int i = 0; i < temparr.size(); i++)
         {
-            lexArr.push_back(temparr[i]);
+            for(unsigned int j = 0; j < temparr[i].size(); j++)
+            {
+                if(temparr[i][j] == '(')
+                {
+                    lexArr.push_back("(");
+                    temparr[i].erase(j,1);
+                }
+                else if(temparr[i][j] == ')')
+                {
+                    lexArr.push_back(")");
+                    temparr[i].erase(j,1);
+                }
+                else if(isalpha(temparr[i][j]))
+                {
+
+                }
+            }
+            if(temparr[i].back() == ';'){
+                temparr[i].erase(temparr[i].end() - 1);
+                lexArr.push_back(temparr[i]);
+                lexArr.push_back(";");
+            }
+            else
+            {
+                lexArr.push_back(temparr[i]);
+            }
+
         }
     }
     counter = 0;
+
 }
 
 Token Lexer::nextToken()

@@ -39,10 +39,10 @@
 1424203456 c:\users\hjalt_000\documents\github\compiler_fmal\token.h
 	<string>
 
-1424208176 source:c:\users\hjalt_000\documents\github\compiler_fmal\parser.cpp
+1424256939 source:c:\users\hjalt_000\documents\github\compiler_fmal\parser.cpp
 	"Parser.h"
 
-1424208097 source:c:\users\hjalt_000\documents\github\compiler_fmal\lexer.cpp
+1424263099 source:c:\users\hjalt_000\documents\github\compiler_fmal\lexer.cpp
 	<iostream>
 	"Lexer.h"
 
