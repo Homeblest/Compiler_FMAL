@@ -46,3 +46,28 @@
 	<iostream>
 	"Lexer.h"
 
+1424264633 source:c:\users\tryggvit\documents\github\compiler_fmal\compiler.cpp
+	<iostream>
+	"Parser.h"
+
+1424264633 c:\users\tryggvit\documents\github\compiler_fmal\parser.h
+	"Lexer.h"
+
+1424265357 c:\users\tryggvit\documents\github\compiler_fmal\lexer.h
+	<string>
+	<sstream>
+	<iostream>
+	<vector>
+	<iterator>
+	"Token.h"
+
+1424264633 c:\users\tryggvit\documents\github\compiler_fmal\token.h
+	<string>
+
+1424267226 source:c:\users\tryggvit\documents\github\compiler_fmal\parser.cpp
+	"Parser.h"
+
+1424267265 source:c:\users\tryggvit\documents\github\compiler_fmal\lexer.cpp
+	<iostream>
+	"Lexer.h"
+

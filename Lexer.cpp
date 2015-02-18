@@ -4,124 +4,133 @@
 
 Lexer::Lexer()
 {
+    string input;
+    finalString = "";
     while(getline(cin, input) && input != "end")
     {
-        stringstream ss(input);
-
-        istream_iterator<string> begin(ss);
-        istream_iterator<string> end;
-        vector<string> temparr(begin, end);
-
-        string word;
-        for(unsigned int i = 0; i < temparr.size(); i++)
+        for(unsigned int i = 0; i < input.length(); i++)
         {
-            for(unsigned int j = 0; j < temparr[i].size(); j++)
+            if(input[i] == ' ')
             {
-                if(temparr[i][j] == '(')
-                {
-                    lexArr.push_back("(");
-                    temparr[i].erase(j,1);
-                }
-                else if(temparr[i][j] == ')')
-                {
-                    lexArr.push_back(")");
-                    temparr[i].erase(j,1);
-                }
-                else if(isalpha(temparr[i][j]))
-                {
-
-                }
+                input.erase(i,1);
             }
-            if(temparr[i].back() == ';'){
-                temparr[i].erase(temparr[i].end() - 1);
-                lexArr.push_back(temparr[i]);
-                lexArr.push_back(";");
-            }
-            else
-            {
-                lexArr.push_back(temparr[i]);
-            }
-
         }
+        finalString += input;
     }
-    counter = 0;
-
 }
 
 Token Lexer::nextToken()
 {
-    // Implement
-    Token *nextToken = new Token();
-
-    if(counter < lexArr.size())
+    Token * nextToken = new Token();
+    if(finalString[0] == '(')
     {
-        // Get the string at index counter
-        string word = lexArr[counter];
-        // Check if first digit of word is a letter
-        if(isalpha(word[0]))
+        nextToken->lexeme = "(";
+        nextToken->tCode = Token::LPAREN;
+        finalString.erase(0,1);
+    }
+    else if(finalString[0] == ')')
+    {
+        nextToken->lexeme = ")";
+        nextToken->tCode = Token::RPAREN;
+        finalString.erase(0,1);
+    }
+    else if(finalString[0] == '+')
+    {
+        nextToken->lexeme = "+";
+        nextToken->tCode = Token::PLUS;
+        finalString.erase(0,1);
+    }
+    else if(finalString[0] == '-')
+    {
+        nextToken->lexeme = "-";
+        nextToken->tCode = Token::MINUS;
+        finalString.erase(0,1);
+    }
+    else if(finalString[0] == '*')
+    {
+        nextToken->lexeme = "*";
+        nextToken->tCode = Token::MULT;
+        finalString.erase(0,1);
+    }
+    else if(finalString[0] == '=')
+    {
+        nextToken->lexeme = "=";
+        nextToken->tCode = Token::ASSIGN;
+        finalString.erase(0,1);
+    }
+    else if(finalString[0] == ';')
+    {
+        nextToken->lexeme = ";";
+        nextToken->tCode = Token::SEMICOL;
+        finalString.erase(0,1);
+    }
+    else if(isdigit(finalString[0]))
+    {
+        string numb = "";
+        int j = 0;
+        while(isdigit(finalString[j]))
         {
-            if(word == "print")
+            numb += finalString[j];
+            j++;
+        }
+        nextToken->lexeme = numb;
+        nextToken->tCode = Token::INT;
+        finalString.erase(0,j);
+    }
+    else if(isalpha(finalString[0]))
+    {
+        if(finalString[0] == 'e')
+        {
+            if(finalString[1] == 'n')
             {
-                nextToken->lexeme = word;
-                nextToken->tCode = Token::PRINT;
+                if(finalString[2] == 'd')
+                {
+                    if(finalString.length() == 3)
+                    {
+                        nextToken->lexeme = "end";
+                        nextToken->tCode = Token::END;
+                        finalString.erase(0,3);
+                    }
+                }
             }
-            else
+        }
+        else if(finalString[0] == 'p')
+        {
+            if(finalString[1] == 'r')
             {
-                nextToken->lexeme = word;
-                nextToken->tCode = Token::ID;
+                if(finalString[2] == 'i')
+                {
+                    if(finalString[3] == 'n')
+                    {
+                        if(finalString[4] == 't')
+                        {
+                            nextToken->lexeme = "print";
+                            nextToken->tCode = Token::PRINT;
+                            finalString.erase(0,5);
+                        }
+                    }
+                }
             }
-        }
-        // Else check if first digit of word is a number
-        else if(isdigit(word[0]))
-        {
-            nextToken->lexeme = word;
-            nextToken->tCode = Token::INT;
-        }
-        else if(word == "+")
-        {
-            nextToken->lexeme = "+";
-            nextToken->tCode = Token::PLUS;
-        }
-        else if (word == "-")
-        {
-            nextToken->lexeme = "-";
-            nextToken->tCode = Token::MINUS;
-        }
-        else if(word == "*")
-        {
-            nextToken->lexeme = "*";
-            nextToken->tCode = Token::MULT;
-        }
-        else if(word == "(")
-        {
-            nextToken->lexeme = "(";
-            nextToken->tCode = Token::LPAREN;
-        }
-        else if(word == ")")
-        {
-            nextToken->lexeme = ")";
-            nextToken->tCode = Token::RPAREN;
-        }
-        else if(word == "=")
-        {
-            nextToken->lexeme = "=";
-            nextToken->tCode = Token::ASSIGN;
-        }
-        else if(word == ";")
-        {
-            nextToken->lexeme = ";";
-            nextToken->tCode = Token::SEMICOL;
         }
         else
         {
-            nextToken->tCode = Token::ERROR;
-        }
-
-        counter++;
-
-        return *nextToken;
-
+            int j = 0;
+            string id = "";
+            while(isalpha(finalString[j]))
+            {
+                id += finalString[j];
+                j++;
+            }
+                nextToken->lexeme = id;
+                nextToken->tCode = Token::ID;
+                finalString.erase(0,id.length());
+            }
     }
-    nextToken->tCode = Token::ERROR;
+    else
+    {
+        nextToken->lexeme = "wow";
+        nextToken->tCode = Token::ERROR;
+    }
+    //cout << nextToken->lexeme << " ";
     return *nextToken;
 }
