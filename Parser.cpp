@@ -13,117 +13,97 @@ void Parser::parse()
     statements();
 }
 
-bool Parser::statements()
+void Parser::statements()
 {
     // Do statements things
-    if(!checkError())
+    if(curToken.tCode != Token::END)
     {
-        if(curToken.tCode != Token::END)
+        statement();
+        if(curToken.tCode == Token::SEMICOL)
         {
-            if(!statement())
-            {
-                return false;
-            }
-            if(curToken.tCode != Token::SEMICOL)
-            {
-                return false;
-            }
             curToken = myLexer->nextToken();
-            if(!statements())
-            {
-                return false;
-            }
+            statements();
+        }
+        else
+        {
+            cout << "Syntax error! statements" << endl;
         }
     }
-
-    return true;
+    curToken = myLexer->nextToken();
+    return;
 }
-bool Parser::statement()
+void Parser::statement()
 {
     // Do statement things
     if(curToken.tCode == Token::ID)
     {
         curToken = myLexer->nextToken();
 
-        if(curToken.tCode != Token::ASSIGN)
+        if(curToken.tCode == Token::ASSIGN)
         {
-            return false;
+            curToken = myLexer->nextToken();
+            expr();
+            curToken = myLexer->nextToken();
         }
-
-        curToken = myLexer->nextToken();
-        expr();
+        else
+        {
+            cout << "Syntax error! statement" << endl;
+        }
     }
     else if(curToken.tCode == Token::PRINT)
     {
         curToken = myLexer->nextToken();
-        if(curToken.tCode != Token::ID)
+        if(curToken.tCode == Token::ID)
         {
-            return false;
+            curToken = myLexer->nextToken();
         }
     }
     else
     {
-        return false;
+        cout << "Syntax error! statement2" << endl;
     }
-    return true;
 }
-bool Parser::expr()
+void Parser::expr()
 {
-    if(!term()){
-        return false;
-    }
-    else if(curToken.tCode == Token::PLUS){
+    term();
+    if(curToken.tCode == Token::PLUS){
         curToken = myLexer->nextToken();
-        if(!expr()){
-            return false;
-        }
+        expr();
     }
     else if(curToken.tCode == Token::MINUS){
         curToken = myLexer->nextToken();
-        if(!expr()){
-            return false;
-        }
+        expr();
     }
-
-    return true;
 }
 
-bool Parser::term()
+void Parser::term()
 {
-    if(!factor()){
-        return false;
-    }
-    else if(curToken.tCode == Token::MULT){
+    factor();
+    if(curToken.tCode == Token::MULT){
         curToken = myLexer->nextToken();
-        if(!term()){
-            return false;
-        }
+        term();
     }
-    return true;
 }
 
-bool Parser::factor()
+void Parser::factor()
 {
     if(curToken.tCode == Token::INT){
-        return true;
+        curToken = myLexer->nextToken();
     }
     else if(curToken.tCode == Token::ID){
-        return true;
+        curToken = myLexer->nextToken();
     }
     else if(curToken.tCode == Token::LPAREN){
         curToken = myLexer->nextToken();
-        if(!expr()){
-            return false;
-        }
-        if(curToken.tCode == Token::RPAREN){
-            return true;
+        expr();
+        if(curToken.tCode != Token::RPAREN){
+            cout << "Syntax error! factor" << endl;
         }
     }
     else
     {
-        return false;
+        cout << "Syntax error! factor2" << endl;
     }
-    return true;
 }
 
 bool Parser::checkError()

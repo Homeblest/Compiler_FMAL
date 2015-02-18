@@ -50,10 +50,10 @@
 	<iostream>
 	"Parser.h"
 
-1424264633 c:\users\tryggvit\documents\github\compiler_fmal\parser.h
+1424275324 c:\users\tryggvit\documents\github\compiler_fmal\parser.h
 	"Lexer.h"
 
-1424265357 c:\users\tryggvit\documents\github\compiler_fmal\lexer.h
+1424270313 c:\users\tryggvit\documents\github\compiler_fmal\lexer.h
 	<string>
 	<sstream>
 	<iostream>
@@ -64,10 +64,10 @@
 1424264633 c:\users\tryggvit\documents\github\compiler_fmal\token.h
 	<string>
 
-1424267226 source:c:\users\tryggvit\documents\github\compiler_fmal\parser.cpp
+1424277839 source:c:\users\tryggvit\documents\github\compiler_fmal\parser.cpp
 	"Parser.h"
 
-1424267265 source:c:\users\tryggvit\documents\github\compiler_fmal\lexer.cpp
+1424277007 source:c:\users\tryggvit\documents\github\compiler_fmal\lexer.cpp
 	<iostream>
 	"Lexer.h"
 

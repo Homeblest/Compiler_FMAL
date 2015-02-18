@@ -7,11 +7,11 @@ class Parser {
 private:
     Lexer *myLexer;
     Token curToken;
-    bool statements();
-    bool statement();
-    bool expr();
-    bool term();
-    bool factor();
+    void statements();
+    void statement();
+    void expr();
+    void term();
+    void factor();
     bool checkError();
 public:
     void parse();

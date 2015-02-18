@@ -10,7 +10,7 @@ Lexer::Lexer()
     {
         for(unsigned int i = 0; i < input.length(); i++)
         {
-            if(input[i] == ' ')
+            if(input[i] == ' ' || input[i] == '\n' || input[i] == '\b')
             {
                 input.erase(i,1);
             }
