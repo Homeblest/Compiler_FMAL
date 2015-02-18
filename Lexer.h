@@ -13,6 +13,7 @@ class Lexer {
 
 private:
     string finalString;
+    Token theToken;
 
 public:
     Lexer();

@@ -1,15 +1,40 @@
 #include "Parser.h"
 
-
 void Parser::parse()
 {
-    Token myToken = myLexer->nextToken();
-    while(myToken.tCode != Token::ERROR)
+    /*
+    curToken = myLexer->nextToken();
+    while(curToken.tCode != Token::ERROR){
+        cout << curToken.lexeme << endl;
+        curToken = myLexer->nextToken();
+    }
+    */
+
+    statements();
+}
+
+bool Parser::statements()
+{
+    // Do statements things
+    if(!statement())
     {
-        cout << myToken.lexeme << endl;
-        myToken = myLexer->nextToken();
+        return false;
     }
-    if(myToken.tCode == Token::ERROR){
-        cout << "error token recieved" << endl;
+    if(curToken.lexeme != ";")
+    {
+        return false;
     }
+    curToken = myLexer->nextToken();
+
+    if(!statements())
+    {
+        return false;
+    }
+
+    return true;
+}
+bool Parser::statement()
+{
+    // Do statement things
+    return true;
 }

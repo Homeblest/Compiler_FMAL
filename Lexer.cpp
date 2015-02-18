@@ -21,47 +21,46 @@ Lexer::Lexer()
 
 Token Lexer::nextToken()
 {
-    Token * nextToken = new Token();
     if(finalString[0] == '(')
     {
-        nextToken->lexeme = "(";
-        nextToken->tCode = Token::LPAREN;
+        theToken.lexeme = "(";
+        theToken.tCode = Token::LPAREN;
         finalString.erase(0,1);
     }
     else if(finalString[0] == ')')
     {
-        nextToken->lexeme = ")";
-        nextToken->tCode = Token::RPAREN;
+        theToken.lexeme = ")";
+        theToken.tCode = Token::RPAREN;
         finalString.erase(0,1);
     }
     else if(finalString[0] == '+')
     {
-        nextToken->lexeme = "+";
-        nextToken->tCode = Token::PLUS;
+        theToken.lexeme = "+";
+        theToken.tCode = Token::PLUS;
         finalString.erase(0,1);
     }
     else if(finalString[0] == '-')
     {
-        nextToken->lexeme = "-";
-        nextToken->tCode = Token::MINUS;
+        theToken.lexeme = "-";
+        theToken.tCode = Token::MINUS;
         finalString.erase(0,1);
     }
     else if(finalString[0] == '*')
     {
-        nextToken->lexeme = "*";
-        nextToken->tCode = Token::MULT;
+        theToken.lexeme = "*";
+        theToken.tCode = Token::MULT;
         finalString.erase(0,1);
     }
     else if(finalString[0] == '=')
     {
-        nextToken->lexeme = "=";
-        nextToken->tCode = Token::ASSIGN;
+        theToken.lexeme = "=";
+        theToken.tCode = Token::ASSIGN;
         finalString.erase(0,1);
     }
     else if(finalString[0] == ';')
     {
-        nextToken->lexeme = ";";
-        nextToken->tCode = Token::SEMICOL;
+        theToken.lexeme = ";";
+        theToken.tCode = Token::SEMICOL;
         finalString.erase(0,1);
     }
     else if(isdigit(finalString[0]))
@@ -73,8 +72,8 @@ Token Lexer::nextToken()
             numb += finalString[j];
             j++;
         }
-        nextToken->lexeme = numb;
-        nextToken->tCode = Token::INT;
+        theToken.lexeme = numb;
+        theToken.tCode = Token::INT;
         finalString.erase(0,j);
     }
     else if(isalpha(finalString[0]))
@@ -87,10 +86,10 @@ Token Lexer::nextToken()
                 {
                     if(finalString.length() == 3)
                     {
-                        nextToken->lexeme = "end";
-                        nextToken->tCode = Token::END;
+                        theToken.lexeme = "end";
+                        theToken.tCode = Token::END;
                         finalString.erase(0,3);
-                        return *nextToken;
+                        return theToken;
                     }
                 }
             }
@@ -105,10 +104,10 @@ Token Lexer::nextToken()
                     {
                         if(finalString[4] == 't')
                         {
-                            nextToken->lexeme = "print";
-                            nextToken->tCode = Token::PRINT;
+                            theToken.lexeme = "print";
+                            theToken.tCode = Token::PRINT;
                             finalString.erase(0,5);
-                            return *nextToken;
+                            return theToken;
                         }
                     }
                 }
@@ -121,14 +120,14 @@ Token Lexer::nextToken()
             id += finalString[j];
             j++;
         }
-        nextToken->lexeme = id;
-        nextToken->tCode = Token::ID;
+        theToken.lexeme = id;
+        theToken.tCode = Token::ID;
         finalString.erase(0,id.length());
     }
     else
     {
-        nextToken->lexeme = "wow";
-        nextToken->tCode = Token::ERROR;
+        theToken.lexeme = "wow";
+        theToken.tCode = Token::ERROR;
     }
-    return *nextToken;
+    return theToken;
 }

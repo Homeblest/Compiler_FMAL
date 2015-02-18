@@ -6,12 +6,13 @@
 class Parser {
 private:
     Lexer *myLexer;
-    Token *curToken;
+    Token curToken;
 public:
     Parser(Lexer *inputLexer) {
         myLexer = inputLexer;
-        curToken = new Token();
     };
     void parse();
+    bool statements();
+    bool statement();
 };
 #endif // PARSER_H
